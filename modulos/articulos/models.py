@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 class Articulos(models.Model):
     nombre = models.TextField()
     existencia = models.IntegerField()

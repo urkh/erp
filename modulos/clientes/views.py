@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from modulos.clientes.models import Clientes
-from modulos.clientes.forms import ClientesForm
+from modulos.clientes.forms import FormClientes
 
 
 
@@ -15,15 +15,15 @@ def clientes(request):
     return render_to_response('clientes.html',{'clientes': clientes})
 
 
-def cliente_nuevo(request):
+def nuevo_cliente(request):
     if request.method=='POST':
-        form = ClientesForm(request.POST)
+        form = FormClientes(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/clientes/lista')
+            return HttpResponseRedirect('/clientes/')
    
     else:
-        form = ClientesForm()
+        form = FormClientes()
     
-    return render_to_response('clientesForm.html', {'form': form})
+    return render_to_response('add_cliente.html', {'form': form})
 

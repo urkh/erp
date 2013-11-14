@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block titulo %} Lista de Clientes {% endblock %}
 
-{% block titulo %} Lista de Articulos {% endblock %}
 
 
 {% block javascripts %}
@@ -84,6 +84,7 @@
 {% endblock %}
 
 
+
 {% block contenido %}
   <div class="main-wrapper">
     <div class="container-fluid">
@@ -93,7 +94,7 @@
             <h3 class="page-header">Data Tables</h3>
             <ul class="top-right-toolbar">
               <li>
-                <a data-toggle="dropdown" class="dropdown-toggle green" href="/articulos/nuevo/" title="Agregar Articulo">
+                <a data-toggle="dropdown" class="dropdown-toggle green" href="/clientes/nuevo/" title="Agregar Cliente">
                   <i class="icon-user"></i>
                 </a>
               </li>
@@ -150,8 +151,8 @@
               </thead>
               <tbody>
 
+            {% for dato in clientes %}
 
-            {% for dato in articulos %}
               <tr>
                 <td>
                    1/6/10
@@ -178,6 +179,7 @@
 
             {% endfor %}
 
+
               </tbody>
               </table>
             </div>
@@ -189,8 +191,5 @@
 
     </div>
   </div>
-
-
- 
 
 {% endblock %}
