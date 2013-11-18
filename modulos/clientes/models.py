@@ -2,14 +2,19 @@ from django.db import models
 
 class Clientes(models.Model):
     rif = models.CharField(max_length=50)
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    fechaReg = models.DateField()
+    codigo = models.CharField(max_length=12)
+    nombre = models.CharField(max_length=100)
+    fecha_ing = models.DateField()
     status = models.BooleanField()
+    correo = models.EmailField(max_length=100)
+    telefono = models.IntegerField()
+    direccion = models.TextField()
 
     def __unicode__(self):
         return self.nombre
 
+
+"""
 
 
 class Correos(models.Model):
@@ -34,3 +39,4 @@ class Direcciones(models.Model):
 
     def __unicode__(self):
         return self.direccion
+"""

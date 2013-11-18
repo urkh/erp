@@ -1,3 +1,5 @@
 from django.contrib import admin
+from modulos.materiales.models import Materiales
 
-# Register your models here.
+
+admin.site.register(Materiales)

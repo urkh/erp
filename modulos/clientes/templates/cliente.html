@@ -1,631 +1,164 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block titulo %} Lista de Clientes {% endblock %}
-
-
+{% block titulo %} A&ntilde;adir Clientes {% endblock %}
 
 {% block javascripts %}
 
-<script src="{% static "js/jquery.tablecloth.js" %}"></script>
-<script src="{% static "js/jquery.dataTables.js" %}"></script>
-<script src="{% static "js/ZeroClipboard.js" %}"></script>
-<script src="{% static "js/dataTables.bootstrap.js" %}"></script>
-<script src="{% static "js/TableTools.js" %}"></script>
+<script src="{% static "js/bootstrap-datetimepicker.min.js" %}"></script>
 <script type="text/javascript">
-            /*$( function () {
-      // Set the classes that TableTools uses to something suitable for Bootstrap
-      $.extend( true, $.fn.DataTable.TableTools.classes, {
-        "container": "btn-group",
-        "buttons": {
-          "normal": "btn",
-          "disabled": "btn disabled"
-        },
-        "collection": {
-          "container": "DTTT_dropdown dropdown-menu",
-          "buttons": {
-            "normal": "",
-            "disabled": "disabled"
-          }
-        }
-      } );
-      // Have the collection use a bootstrap compatible dropdown
-      $.extend( true, $.fn.DataTable.TableTools.DEFAULTS.oTags, {
-        "collection": {
-          "container": "ul",
-          "button": "li",
-          "liner": "a"
-        }
-      } );
-      });
-      */
-            $(function () {
-                $('#data-table').dataTable({
-                    "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
-                    /*"oTableTools": {
-      "aButtons": [
-        "copy",
-        "print",
-        {
-          "sExtends":    "collection",
-          "sButtonText": 'Save <span class="caret" />',
-          "aButtons":    [ "csv", "xls", "pdf" ]
-        }
-      ]
-    }*/
-                });
-            });
-            $(function () {
-                $('.tbl-simple').dataTable({
-                    "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
-                });
-            });
-      
-      $(function () {
-      $(".tbl-paper-theme").tablecloth({
-          theme: "paper"
-       });
-      });
-      
-    $(function () {
-      $(".tbl-dark-theme").tablecloth({
-          theme: "dark"
-       });
-    });
-      $(function () {
-                $('.tbl-paper-theme,.tbl-dark-theme').dataTable({
-                    "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
-                });
-  
 
-            });
-        </script>
+    $(function () {
+        $('#datetimepicker4').datetimepicker({
+            pickTime: false
+        });
+    });
+
+</script>
 
 {% endblock %}
 
 
-{% block menu %}activo{% endblock %} 
-
-
-
-
 
 {% block contenido %}
-  <div class="main-wrapper">
-    <div class="container-fluid">
-      <div class="row-fluid ">
-        <div class="span12">
-          <div class="primary-head">
-            <h3 class="page-header">Data Tables</h3>
-            <ul class="top-right-toolbar">
-              <li>
-                <a data-toggle="dropdown" class="dropdown-toggle green" href="/clientes/nuevo/" title="Agregar Cliente">
-                  <i class="icon-user"></i>
-                </a>
-              </li>
-
-              <!--
-              <li><a href="#" class="green" title="Upload"><i class=" icon-upload-alt"></i></a></li>
-              <li><a href="#" class="bondi-blue" title="Settings"><i class="icon-cogs"></i></a></li>
-              -->
-
-            </ul>
-          </div>
-          <ul class="breadcrumb">
-            <li><a href="#" class="icon-home"></a><span class="divider "><i class="icon-angle-right"></i></span></li>
-            <li><a href="#">Library</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-            <li class="active">Tables</li>
-          </ul>
-        </div>
-      </div>
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="content-widgets light-gray">
-            <div class="widget-head orange">
-              <h3>Data Table</h3>
-            </div>
-            <div class="widget-container">
-              <p>
-                Aenean nibh ante, lacinia non tincidunt nec, lobortis ut tellus. Sed in porta diam. Suspendisse potenti. Donec luctus ullamcorper nulla. Duis nec velit odio. Nunc pulvinar nulla vitae nulla molestie posuere. Pellentesque aliquet vehicula orci, sit amet scelerisque lorem suscipit convallis. Mauris quam odio, hendrerit eu iaculis pellentesque, laoreet nec est. Pellentesque lobortis velit sit amet augue interdum posuere. Proin vel ligula sed felis rhoncus pellentesque aliquet eu nunc. Etiam convallis laoreet porttitor. Cras placerat blandit lorem id tempor. Aenean aliquam consectetur orci ut hendrerit. Donec mollis placerat ipsum, in vehicula mi euismod congue.
-              </p>
-              <table class="table table-striped table-bordered" id="data-table">
-              <thead>
-              <tr>
-                <th>
-                   OrderDate
-                </th>
-                <th>
-                   Region
-                </th>
-                <th>
-                   Rep
-                </th>
-                <th>
-                   Item
-                </th>
-                <th>
-                   Units
-                </th>
-                <th>
-                   Unit Cost
-                </th>
-                <th>
-                   Total
-                </th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>
-                   1/6/10
-                </td>
-                <td>
-                   Quebec
-                </td>
-                <td>
-                   Jones
-                </td>
-                <td>
-                   Pencil
-                </td>
-                <td>
-                   95
-                </td>
-                <td>
-                   1.99
-                </td>
-                <td>
-                   189.05
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   1/23/10
-                </td>
-                <td>
-                   Ontario
-                </td>
-                <td>
-                   Kivell
-                </td>
-                <td>
-                   Binder
-                </td>
-                <td>
-                   50
-                </td>
-                <td>
-                   19.99
-                </td>
-                <td>
-                   999.50
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   2/9/10
-                </td>
-                <td>
-                   Ontario
-                </td>
-                <td>
-                   Jardine
-                </td>
-                <td>
-                   Pencil
-                </td>
-                <td>
-                   36
-                </td>
-                <td>
-                   4.99
-                </td>
-                <td>
-                   179.64
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   2/26/10
-                </td>
-                <td>
-                   Ontario
-                </td>
-                <td>
-                   Gill
-                </td>
-                <td>
-                   Pen
-                </td>
-                <td>
-                   27
-                </td>
-                <td>
-                   19.99
-                </td>
-                <td>
-                   539.73
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   3/15/10
-                </td>
-                <td>
-                   Alberta
-                </td>
-                <td>
-                   Sorvino
-                </td>
-                <td>
-                   Pencil
-                </td>
-                <td>
-                   56
-                </td>
-                <td>
-                   2.99
-                </td>
-                <td>
-                   167.44
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   4/1/10
-                </td>
-                <td>
-                   Quebec
-                </td>
-                <td>
-                   Jones
-                </td>
-                <td>
-                   Binder
-                </td>
-                <td>
-                   60
-                </td>
-                <td>
-                   4.99
-                </td>
-                <td>
-                   299.40
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   4/18/10
-                </td>
-                <td>
-                   Ontario
-                </td>
-                <td>
-                   Andrews
-                </td>
-                <td>
-                   Pencil
-                </td>
-                <td>
-                   75
-                </td>
-                <td>
-                   1.99
-                </td>
-                <td>
-                   149.25
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   5/5/10
-                </td>
-                <td>
-                   Ontario
-                </td>
-                <td>
-                   Jardine
-                </td>
-                <td>
-                   Pencil
-                </td>
-                <td>
-                   90
-                </td>
-                <td>
-                   4.99
-                </td>
-                <td>
-                   449.10
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   5/22/10
-                </td>
-                <td>
-                   Alberta
-                </td>
-                <td>
-                   Thompson
-                </td>
-                <td>
-                   Pencil
-                </td>
-                <td>
-                   32
-                </td>
-                <td>
-                   1.99
-                </td>
-                <td>
-                   63.68
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   6/8/10
-                </td>
-                <td>
-                   Quebec
-                </td>
-                <td>
-                   Jones
-                </td>
-                <td>
-                   Binder
-                </td>
-                <td>
-                   60
-                </td>
-                <td>
-                   8.99
-                </td>
-                <td>
-                   539.40
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   6/25/10
-                </td>
-                <td>
-                   Ontario
-                </td>
-                <td>
-                   Morgan
-                </td>
-                <td>
-                   Pencil
-                </td>
-                <td>
-                   90
-                </td>
-                <td>
-                   4.99
-                </td>
-                <td>
-                   449.10
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   7/12/10
-                </td>
-                <td>
-                   Quebec
-                </td>
-                <td>
-                   Howard
-                </td>
-                <td>
-                   Binder
-                </td>
-                <td>
-                   29
-                </td>
-                <td>
-                   1.99
-                </td>
-                <td>
-                   57.71
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   7/29/10
-                </td>
-                <td>
-                   Quebec
-                </td>
-                <td>
-                   Parent
-                </td>
-                <td>
-                   Binder
-                </td>
-                <td>
-                   81
-                </td>
-                <td>
-                   19.99
-                </td>
-                <td>
-                   1,619.19
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   8/15/10
-                </td>
-                <td>
-                   Quebec
-                </td>
-                <td>
-                   Jones
-                </td>
-                <td>
-                   Pencil
-                </td>
-                <td>
-                   35
-                </td>
-                <td>
-                   4.99
-                </td>
-                <td>
-                   174.65
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   9/1/10
-                </td>
-                <td>
-                   Ontario
-                </td>
-                <td>
-                   Smith
-                </td>
-                <td>
-                   Desk
-                </td>
-                <td>
-                   2
-                </td>
-                <td>
-                   125.00
-                </td>
-                <td>
-                   250.00
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   9/18/10
-                </td>
-                <td>
-                   Quebec
-                </td>
-                <td>
-                   Jones
-                </td>
-                <td>
-                   Pen Set
-                </td>
-                <td>
-                   16
-                </td>
-                <td>
-                   15.99
-                </td>
-                <td>
-                   255.84
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   10/5/10
-                </td>
-                <td>
-                   Ontario
-                </td>
-                <td>
-                   Morgan
-                </td>
-                <td>
-                   Binder
-                </td>
-                <td>
-                   28
-                </td>
-                <td>
-                   8.99
-                </td>
-                <td>
-                   251.72
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   10/22/10
-                </td>
-                <td>
-                   Quebec
-                </td>
-                <td>
-                   Jones
-                </td>
-                <td>
-                   Pen
-                </td>
-                <td>
-                   64
-                </td>
-                <td>
-                   8.99
-                </td>
-                <td>
-                   575.36
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   11/8/10
-                </td>
-                <td>
-                   Quebec
-                </td>
-                <td>
-                   Parent
-                </td>
-                <td>
-                   Pen
-                </td>
-                <td>
-                   15
-                </td>
-                <td>
-                   19.99
-                </td>
-                <td>
-                   299.85
-                </td>
-              </tr>
-              <tr>
-                <td>
-                   11/25/10
-                </td>
-                <td>
-                   Ontario
-                </td>
-                <td>
-                   Kivell
-                </td>
-                <td>
-                   Pen Set
-                </td>
-                <td>
-                   96
-                </td>
-                <td>
-                   4.99
-                </td>
-                <td>
-                   479.04
-                </td>
-              </tr>
-
-              </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      
 
 
-    </div>
-  </div>
+	<div class="main-wrapper">
+		<div class="container-fluid">
+			<div class="row-fluid ">
+				<div class="span12">
+					<div class="primary-head">
+						<ul class="top-right-toolbar">
+							<li>
+								<a href="/clientes/" class="green" title="Lista de Clientes">
+									<i class=" icon-list"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#" class="icon-home"></a>
+							<span class="divider ">
+								<i class="icon-angle-right"></i>
+							</span>
+						</li>
+						<li>
+							<a href="/clientes/">Clientes</a>
+							<span class="divider">
+								<i class="icon-angle-right"></i>
+							</span>
+						</li>
+						<li class="active">Nuevo</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="content-widgets gray">
+						<div class="widget-head blue">
+							<h3> Nuevo Registro:</h3>
+						</div>
+						<div class="widget-container">
+							<div class="form-container grid-form form-background">
+								<form class="form-horizontal left-align" method="POST" action="">{% csrf_token %}
+									
+
+								<fieldset class="default">
+									<legend>Informaci&oacute;n del Cliente:</legend>
+
+									<div class="control-group">
+										<label class="control-label">C&oacute;digo:</label>
+										<div class="controls">
+											<input id="codigo" name="codigo" type="text" value="{{cliente.codigo}}" class="span5"/>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<label class="control-label">RIF:</label>
+										<div class="controls">
+											<input id="rif" name="rif" class="span6" type="text" value="{{cliente.rif}}"/>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">Nombre:</label>
+										<div class="controls">
+											<input id="nombre" name="nombre" type="text" class="span10" value="{{cliente.nombre}}"/>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">Fecha de Ingreso:</label>
+										<div class="controls">
+											<div id="datetimepicker4" class="input-append">
+												<input data-format="yyyy-MM-dd" type="text" name="fecha_ing" id="fecha_ing" value="{{cliente.fecha_ing}}">
+												<span class="add-on">
+													<i data-time-icon="icon-time" data-date-icon="icon-calendar">
+													</i>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">Estatus:</label>
+										<div class="controls">
+											<select name="status" class="span4">
+												<option value="True">Activo</option>
+												<option value="False">Inactivo</option>
+											</select>
+										</div>
+									</div>
+
+
+
+
+								</fieldset>
+
+			
+
+									<fieldset class="default">
+										<legend>Informaci&oacute;n de Contacto:</legend>
+										
+
+										<div class="control-group">
+											<label class="control-label">Tel&eacute;fono:</label>
+											<div class="controls input-icon">
+												<i class="icon-phone"></i>
+												<input id="telefono" name="telefono" type="text" class="span5" value="{{cliente.telefono}}"/>
+											</div>
+										</div>
+
+										<div class="control-group">
+											<label class="control-label">Correo Electr&oacute;nico:</label>
+											<div class="controls input-icon">
+												<i class="icon-envelope"></i>
+												<input id="correo" name="correo" type="email" class="span5" value="{{cliente.correo}}"/>
+											</div>
+										</div>
+
+										<div class="control-group">
+											<label class="control-label">Direcci&oacute;n:</label>
+											<div class="controls">
+												<textarea class="span10" id="direccion" name="direccion">{{cliente.direccion}}</textarea>
+											</div>
+										</div>
+										
+									</fieldset>
+
+
+									<div class="form-actions">
+										<button type="submit" class="btn btn-primary">Guardar</button>
+										<button type="button" class="btn">Cancelar</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

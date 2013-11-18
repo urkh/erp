@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
+{% block titulo %} A&ntilde;adir Clientes {% endblock %}
 
-{% block titulo %} Registro de nuevo cliente {% endblock %}
+{% block javascripts %}
+
+<script src="{% static "js/bootstrap-datetimepicker.min.js" %}"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $('#datetimepicker4').datetimepicker({
+            pickTime: false
+        });
+    });
+
+</script>
+
+{% endblock %}
 
 
 
@@ -13,18 +28,28 @@
 			<div class="row-fluid ">
 				<div class="span12">
 					<div class="primary-head">
-						<h3 class="page-header">Form Validation</h3>
 						<ul class="top-right-toolbar">
-							<li><a data-toggle="dropdown" class="dropdown-toggle blue-violate" href="#" title="Users"><i class="icon-user"></i></a>
+							<li>
+								<a href="/clientes/" class="green" title="Lista de Clientes">
+									<i class=" icon-list"></i>
+								</a>
 							</li>
-							<li><a href="#" class="green" title="Upload"><i class=" icon-upload-alt"></i></a></li>
-							<li><a href="#" class="bondi-blue" title="Settings"><i class="icon-cogs"></i></a></li>
 						</ul>
 					</div>
 					<ul class="breadcrumb">
-						<li><a href="#" class="icon-home"></a><span class="divider "><i class="icon-angle-right"></i></span></li>
-						<li><a href="#">Library</a><span class="divider"><i class="icon-angle-right"></i></span></li>
-						<li class="active">Form</li>
+						<li>
+							<a href="#" class="icon-home"></a>
+							<span class="divider ">
+								<i class="icon-angle-right"></i>
+							</span>
+						</li>
+						<li>
+							<a href="/clientes/">Clientes</a>
+							<span class="divider">
+								<i class="icon-angle-right"></i>
+							</span>
+						</li>
+						<li class="active">Nuevo</li>
 					</ul>
 				</div>
 			</div>
@@ -32,79 +57,100 @@
 				<div class="span12">
 					<div class="content-widgets gray">
 						<div class="widget-head blue">
-							<h3> Sign Up Form</h3>
+							<h3> Nuevo Registro:</h3>
 						</div>
 						<div class="widget-container">
 							<div class="form-container grid-form form-background">
-								<form class="form-horizontal left-align" id="signupForm" method="get" action="#">{% csrf_token %}
+								<form class="form-horizontal left-align" method="POST" action="">{% csrf_token %}
+									
+
+								<fieldset class="default">
+									<legend>Informaci&oacute;n del Cliente:</legend>
+
 									<div class="control-group">
-										<label class="control-label">First Name</label>
+										<label class="control-label">C&oacute;digo:</label>
 										<div class="controls">
-											<input id="firstname" name="firstname" class="span12" type="text"/>
+											<input id="codigo" name="codigo" type="text" value="{{cliente.codigo}}" class="span5"/>
 										</div>
 									</div>
+									
 									<div class="control-group">
-										<label class="control-label">Last Name</label>
+										<label class="control-label">RIF:</label>
 										<div class="controls">
-											<input id="lastname" name="lastname" type="text" class="span12"/>
+											<input id="rif" name="rif" class="span6" type="text" value="{{cliente.rif}}"/>
 										</div>
 									</div>
+
 									<div class="control-group">
-										<label class="control-label">User Name</label>
+										<label class="control-label">Nombre:</label>
 										<div class="controls">
-											<input id="username" name="username" type="text" class="span12"/>
+											<input id="nombre" name="nombre" type="text" class="span10" value="{{cliente.nombre}}"/>
 										</div>
 									</div>
+
 									<div class="control-group">
-										<label class="control-label">Password</label>
+										<label class="control-label">Fecha de Ingreso:</label>
 										<div class="controls">
-											<input id="password" name="password" type="password" class="span12"/>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label">Confirm password</label>
-										<div class="controls">
-											<input id="confirm_password" name="confirm_password" type="password" class="span12"/>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label">Email</label>
-										<div class="controls">
-											<input id="email" name="email" type="email" class="span12"/>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label">Please agree to our policy</label>
-										<div class="controls">
-											<input type="checkbox" class="checkbox" id="agree" name="agree"/>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label">Monthly Newsletter</label>
-										<div class="controls">
-											<input type="checkbox" class="checkbox" id="newsletter" name="newsletter"/>
-										</div>
-									</div>
-									<fieldset id="newsletter_topics">
-										<div class="control-group">
-											<h6 class="legend-h">Topics (select at least two) - note: would be hidden when newsletter isn't selected, but is visible here for the demo</h6>
-											<div class="controls">
-												<label class="checkbox">
-												<input type="checkbox" id="topic_marketflash" value="marketflash" name="topic"/>
-												Marketflash </label>
-												<label class="checkbox">
-												<input type="checkbox" id="topic_fuzz" value="fuzz" name="topic"/>
-												Latest fuzz </label>
-												<label class="checkbox">
-												<input type="checkbox" id="topic_digester" value="digester" name="topic"/>
-												Mailing list digester </label>
+											<div id="datetimepicker4" class="input-append">
+												<input data-format="yyyy-MM-dd" type="text" name="fecha_ing" id="fecha_ing" value="{{cliente.fecha_ing}}">
+												<span class="add-on">
+													<i data-time-icon="icon-time" data-date-icon="icon-calendar">
+													</i>
+												</span>
 											</div>
-											<label class="error">Please select at least two topics you'd like to receive.</label>
 										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">Estatus:</label>
+										<div class="controls">
+											<select name="status" class="span4">
+												<option value="True">Activo</option>
+												<option value="False">Inactivo</option>
+											</select>
+										</div>
+									</div>
+
+
+
+
+								</fieldset>
+
+			
+
+									<fieldset class="default">
+										<legend>Informaci&oacute;n de Contacto:</legend>
+										
+
+										<div class="control-group">
+											<label class="control-label">Tel&eacute;fono:</label>
+											<div class="controls input-icon">
+												<i class="icon-phone"></i>
+												<input id="telefono" name="telefono" type="text" class="span5" value="{{cliente.telefono}}"/>
+											</div>
+										</div>
+
+										<div class="control-group">
+											<label class="control-label">Correo Electr&oacute;nico:</label>
+											<div class="controls input-icon">
+												<i class="icon-envelope"></i>
+												<input id="correo" name="correo" type="email" class="span5" value="{{cliente.correo}}"/>
+											</div>
+										</div>
+
+										<div class="control-group">
+											<label class="control-label">Direcci&oacute;n:</label>
+											<div class="controls">
+												<textarea class="span10" id="direccion" name="direccion">{{cliente.direccion}}</textarea>
+											</div>
+										</div>
+										
 									</fieldset>
+
+
 									<div class="form-actions">
-										<button type="submit" class="btn btn-primary">Sign Up</button>
-										<button type="button" class="btn">Cancel</button>
+										<button type="submit" class="btn btn-primary">Guardar</button>
+										<button type="button" class="btn">Cancelar</button>
 									</div>
 								</form>
 							</div>
